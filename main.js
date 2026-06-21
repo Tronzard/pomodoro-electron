@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
 
 let win;
@@ -44,6 +44,12 @@ function resizeToContent() {
       });
   }, 80);
 }
+
+ipcMain.on("move-window", (_event, { dx, dy }) => {
+  if (!win) return;
+  const [x, y] = win.getPosition();
+  win.setPosition(x + dx, y + dy);
+});
 
 app.whenReady().then(createWindow);
 
