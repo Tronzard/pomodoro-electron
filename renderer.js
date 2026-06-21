@@ -181,6 +181,11 @@ tomato.addEventListener(
       dragMoved = false;
       return;
     }
+
+    tomato.classList.remove("bounce");
+    void tomato.offsetWidth;
+    tomato.classList.add("bounce");
+
     glassCard.classList.toggle("collapsed");
     window.api.resizeWindow();
   },
