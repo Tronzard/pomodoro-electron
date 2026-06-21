@@ -1,0 +1,320 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        overflow: hidden;
+        display: inline-block;
+        font-family: Georgia, serif, "Inter";
+      }
+
+      body {
+        -webkit-app-region: drag;
+      }
+
+      @font-face {
+        font-family: Inter; 
+        src: url("./font/Inter-VariableFont_opsz\,wght.ttf") format("truetype");
+      }
+
+      .widget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tomato {
+        font-size: 80px;
+      }
+
+      /* todo add border to white text */
+      .timer {
+        font-size: 20px;
+        color: white;
+        margin-bottom: 8px;
+        margin-top: -12px;
+        font-family: Inter;
+        font-weight: 500;
+      }
+
+      /* From Uiverse.io by byllzz */
+      .glass-card {
+        display: flex;
+        flex-direction: column;
+        width: 160px;
+        background: rgba(36, 36, 36, 0.628);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 14px;
+        padding: 14px;
+        color: #ffffff;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.3s ease;
+        overflow: visible;
+        gap: 14px;
+      }
+
+      .glass-card, button {
+        -webkit-app-region: no-drag;
+      }
+
+      .counter{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-family: Inter;
+        font-weight: 100;
+      }
+
+      .counter label{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .increment-btn{
+        border: none;
+        background: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+        padding: 0;
+
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        font-family: Inter;
+
+      }
+
+      .title {
+        text-align: center;
+        font-family: Inter;
+        font-size: 15px;
+        font-weight: 600;
+        color: #e86b62;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+
+      .counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+      }
+
+      .increment-btn {
+        width: 28px;
+        height: 28px;
+
+        border: none;
+        border-radius: 8px;
+
+        background: transparent;
+
+        color: white;
+
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 500;
+
+        cursor: pointer;
+
+        transition: 0.15s;
+      }
+
+      .increment-btn:hover {
+        background: rgba(255,255,255,0.08);
+      }
+
+      .start-btn {
+        flex: 1;
+
+        height: 30px;
+        padding: 0 14px;
+
+        border-radius: 10px;
+        border: none;
+
+        background: #ef554b;
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: transform 0.18s ease,
+                    box-shadow 0.18s ease,
+                    filter 0.18s ease;
+        
+        will-change: transform;
+      }
+
+      .start-btn:hover {
+          transform: scale(1.06);
+
+          box-shadow:
+            0 12px 30px rgba(239, 85, 75, 0.35),
+            0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+      .duration {
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255,255,255,0.9);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .start-btn {
+        flex: 0 0 auto;
+        width: clamp(90px, 40%, 160px);
+
+        height: 32px;
+        border-radius: 10px;
+        border: none;
+
+        background: #ea645a;
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        font-family: Inter;
+
+        font-size: 13px;
+        font-weight: 400;
+
+        cursor: pointer;
+
+        transform-origin: center center;
+
+        transition: transform 0.18s ease, 
+              filter 0.18s ease,
+              box-shadow 0.18s ease;
+      }
+
+      .start-btn .icon {
+        font-size: 12px;
+        margin-top: 1px;
+     }
+
+      .reset-btn {
+        width: 34px;
+        height: 34px;
+
+        border-radius: 10px;
+        border: none;
+
+        background: rgba(255,255,255,0.06);
+        color: white;
+
+        font-size: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        transition: 0.15s;
+        margin-right: 16px;
+
+      }
+
+      .reset-btn:hover {
+        background: rgba(255,255,255,0.12);
+      }
+
+      .start-btn:active {
+        transform: scale(0.98);
+        filter: brightness(0.95);
+
+        box-shadow:
+          0 6px 14px rgba(239, 85, 75, 0.2);
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="widget">
+      <div class="tomato">
+        <svg width="60" height="60" viewBox="0 0 1344 1305" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M400.472 212.039C388.951 215.156 232.446 259.622 125.354 392.671C2.853 544.864 -9.28662 756.18 47.9771 920.233C97.0746 1060.89 209.738 1202.75 356.052 1252.83C422.033 1275.41 503.307 1303.23 579.585 1280.06C595.075 1275.36 632.279 1261.9 682.754 1264.29C722.345 1266.17 750.704 1276.89 760.131 1280.06C839.219 1306.69 976.28 1270.71 1069.64 1215.55C1236.6 1116.91 1284.59 944.642 1301.77 882.96C1318.1 824.341 1364.41 658.117 1278.84 485.855C1202.65 332.462 1067.64 266.375 1022.35 245.011C948.594 210.216 887.814 201.567 810.283 190.535C770.742 184.908 659.803 168.747 481.492 201.531C456.401 206.144 417.286 207.49 400.472 212.039Z" fill="#EF554B" stroke="#231F20" stroke-width="30" stroke-miterlimit="10"/>
+        <path d="M669.5 16.1983C660.955 19.0711 654.922 29.689 654.087 31.3148C650.159 38.9659 650.073 46.1576 650.269 49.6604C651.719 100.487 651.973 138.756 651.485 154.399C651.404 156.974 651.152 162.891 647.641 168.929C643.71 175.692 635.656 182.667 626.092 183.498C621.105 183.931 619.545 182.361 599 175.073C594.086 173.33 590.05 171.957 587.442 171.08C559.969 159.846 532.497 148.613 505.025 137.379C489.579 132.196 476.368 129.914 466.892 128.815C445.006 126.275 438.176 129.479 435.509 130.926C434.496 131.475 422.828 138.031 419.125 151.296C414.891 166.459 422.742 184.385 439.092 194.743C464.892 205.259 490.692 215.776 516.492 226.293C539.022 233.03 553.349 243.539 561.403 250.672C571.168 259.321 573.002 264.153 573.427 267.913C574.659 278.81 564.566 287.453 554.833 297.28C532.723 319.603 519.489 332.94 508.25 344.247C506.161 345.832 503.604 348.004 500.981 350.867C491.838 360.843 480.269 380.864 487.108 391.93C495.285 405.16 525.443 398.59 532.975 396.95C545.095 394.309 554.509 389.556 560.828 385.691C584.279 368.241 607.73 350.791 631.182 333.342C635.362 329.802 649.449 318.775 670.575 318.075C688.938 317.466 702.234 325.004 707.125 328.113C734.597 344.366 762.069 360.619 789.541 376.872C795.325 379.118 804.836 382.007 816.774 381.892C825.57 381.806 832.167 381.743 838.08 377.283C847.281 370.343 849.698 356.629 846.874 346.039C844.121 335.712 836.778 329.838 834.12 327.906C823.321 317.698 812.523 307.489 801.724 297.28C798.865 296.083 794.302 293.574 791.691 288.676C787.132 280.122 790.278 267.564 800.291 258.56C835.885 240.395 871.48 222.229 907.074 204.064C910.692 201.265 919.565 193.613 923.557 180.402C924.825 176.206 928.706 163.365 922.841 152.437C915.941 139.581 897.499 132.998 877.691 137.379C844.247 145.984 810.802 154.588 777.358 163.193C762.396 171.772 745.688 170.784 736.508 161.759C731.157 156.499 729.604 149.728 729.102 145.745C721.418 110.809 713.734 75.8724 706.05 40.9364C702.852 21.8278 683.823 11.3826 669.5 16.1983Z" fill="#39B54A" stroke="#231F20" stroke-width="30" stroke-miterlimit="10"/>
+        <path d="M354.03 315.053C332.043 315.426 316.613 330.902 305.03 342.519C294.844 352.736 281.384 366.235 279.933 386.226C279.551 391.488 278.672 403.589 286.241 410.021C297.74 419.794 319.596 408.711 320.806 408.08C332.191 399.531 342.184 386.531 350.564 376.912C359.184 369.531 369.691 363.031 381.039 353.267C388.684 345.031 387.036 333.329 380.681 324.606C373.48 314.722 359.281 314.963 354.03 315.053Z" fill="#FDC6B4"/>
+        <path d="M1024.79 345.053C1046.78 345.426 1062.21 360.902 1073.79 372.519C1083.98 382.736 1097.44 396.235 1098.89 416.226C1099.27 421.488 1100.15 433.589 1092.58 440.021C1081.08 449.794 1059.22 438.711 1058.01 438.08C1046.63 429.531 1036.64 416.531 1028.26 406.912C1019.64 399.531 1009.13 393.031 997.781 383.267C990.136 375.031 991.784 363.329 998.139 354.606C1005.34 344.722 1019.54 344.963 1024.79 345.053Z" fill="#FDC6B4"/>
+        </svg>
+      </div>
+      <div class="timer" id="timer">25:00</div>
+
+
+      <div class="glass-card">
+        <div class="title">Focus</div>
+
+        <div class="counter">
+          <button class="increment-btn">−</button>
+
+          <span class="duration">25 min</span>
+
+          <button class="increment-btn">+</button>
+        </div>
+
+        <div class="counter">
+          <button class="increment-btn">−</button>
+
+          <span class="duration">25 min</span>
+
+          <button class="increment-btn">+</button>
+        </div>
+
+        <div class="actions">
+          <button class="start-btn">
+            <span class="icon">▶</span>
+            Start
+          </button>
+
+          <button class="reset-btn">
+            ⟲
+          </button>
+        </div>
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

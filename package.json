@@ -1,0 +1,22 @@
+{
+  "name": "pomodoro",
+  "version": "1.0.0",
+  "description": "Pomodoro timer desktop application v1",
+  "keywords": [
+    "pomodoro",
+    "timer"
+  ],
+  "license": "ISC",
+  "author": "Tronzard",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+    
+  },
+  "dependencies": {
+    "electron": "^42.4.1"
+  },
+  "devDependencies": {}
+}
