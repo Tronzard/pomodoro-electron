@@ -1,4 +1,4 @@
-const FOCUS_MIN = 20,
+const FOCUS_MIN = 15,
   FOCUS_MAX = 60,
   FOCUS_STEP = 5;
 const BREAK_MIN = 5,
@@ -10,7 +10,7 @@ const ICON_PLAY = `<svg width="10" height="11" viewBox="0 0 10 11" fill="none" x
 const ICON_PAUSE = `<svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="3" height="9" rx="1" fill="white"/><rect x="6" y="1" width="3" height="9" rx="1" fill="white"/></svg>`;
 
 //  state
-let focusMin = 0;
+let focusMin = 20;
 let breakMin = 5;
 let phase = "focus";
 let running = false;
@@ -18,7 +18,7 @@ let m = 0,
   s = 0;
 let intervalId = null;
 
-// --- DOM ---
+//  DOM
 const timerEl = document.getElementById("timer");
 const startBtn = document.querySelector(".start-btn");
 const resetBtn = document.querySelector(".reset-btn");
@@ -75,7 +75,7 @@ function nextPhase() {
   renderTimer();
   renderPhase();
 
-  // flash + shake the tomato
+  // flash and shake the tomato
   tomato.classList.remove("phase-alert");
   void tomato.offsetWidth;
   tomato.classList.add("phase-alert");

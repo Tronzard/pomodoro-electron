@@ -375,7 +375,7 @@ button,
     display: block;
 }
 
-/* lock counters while running */
+/* lock counter */
 .glass-card.running .counter {
     opacity: 0.35;
     pointer-events: none;

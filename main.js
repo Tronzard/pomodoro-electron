@@ -20,6 +20,7 @@ function createWindow() {
     },
   });
 
+  win.setIcon(path.join(__dirname, "./tomato.png"));
   win.loadFile("index.html");
 
   win.once("ready-to-show", () => {
