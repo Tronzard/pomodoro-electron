@@ -1,6 +1,6 @@
-const FOCUS_MIN = 5,
+const FOCUS_MIN = 1,
   FOCUS_MAX = 60,
-  FOCUS_STEP = 5;
+  FOCUS_STEP = 1;
 const BREAK_MIN = 5,
   BREAK_MAX = 20,
   BREAK_STEP = 1;
@@ -30,6 +30,9 @@ const breakDurEl = document.getElementById("break-duration");
 const glassCard = document.querySelector(".glass-card");
 const tomato = document.querySelector(".tomato");
 const widget = document.querySelector(".widget");
+
+const alarm = new Audio("./assets/timeout.mp3");
+alarm.volume = 1.0;
 
 function renderTimer() {
   timerEl.textContent =
@@ -66,6 +69,9 @@ function nextPhase() {
   phase = phase === "focus" ? "break" : "focus";
   m = phase === "focus" ? focusMin : breakMin;
   s = 0;
+
+  alarm.currentTime = 0;
+  alarm.play();
   renderTimer();
   renderPhase();
 }
